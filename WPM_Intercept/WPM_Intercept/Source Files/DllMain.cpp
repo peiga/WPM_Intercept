@@ -30,7 +30,12 @@ BOOL WINAPI WriteProcessMemoryDetour(HANDLE hProcess, LPVOID lpBaseAddress, LPCV
             // Write the content to the file with WriteFile.
             try
             {
+#ifdef _WIN64
+                WriteFile(fileHandle, lpBuffer, nSize, reinterpret_cast<LPDWORD>(lpNumberOfBytesWritten), nullptr);
+#else
                 WriteFile(fileHandle, lpBuffer, nSize, lpNumberOfBytesWritten, nullptr);
+#endif
+
                 NOTIFICATION("[+] Wrote " << nSize << " bytes (0x" << std::hex << nSize << ")" << std::dec << " from address " << "0x" << lpBaseAddress);
             }
             catch (std::exception& error)
