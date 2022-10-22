@@ -2,7 +2,7 @@
 A DLL utility for intercepting WriteProcessMemory calls and dumping the buffer back to disk.
 
 # Usage
-- [1] Open the program that eventually calls WriteProcessMemory.
+- [1] Open the program that calls WriteProcessMemory.
 - [2] Use standard DLL injection to load the module into that process.
 - [3] Any WriteProcessMemory calls will now be dumped back to disk.
 
